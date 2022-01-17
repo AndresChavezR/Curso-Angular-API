@@ -1,4 +1,4 @@
-<button (click)="toogleProductDetail()">Click</button>
+<button (click)="createNewProduct()">Created</button>
 <div class="products--grid">
   <app-product
     [product]="product"
@@ -6,10 +6,19 @@
     (addedProduct)="onAddToShoppingCart($event)"
     (showProduct)="onShowDetail($event)"
   ></app-product>
+  <button (click)="loadMore()">Cargar más elementos</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
-  <div>
+  <div *ngIf="product">
     <button>Close</button>
-    contenido
+    <h1>{{ product.title }}</h1>
+    <swiper [slidesPerView]="1">
+      <ng-template swiperSlide *ngFor="let img of product.images">
+        <img [src]="img" alt="" />
+      </ng-template>
+    </swiper>
+    <p>{{product.description}}</p>
+    <button (click)="updateProducto()">Editar</button>
+    <button (click)="deleteProduct()">Delete</button>
   </div>
 </div>
